@@ -1,0 +1,76 @@
+[gd_scene load_steps=8 format=3 uid="uid://bohkpo855808i"]
+
+[ext_resource type="Script" path="res://Scripts/ui.gd" id="1_fdwwc"]
+[ext_resource type="Texture2D" uid="uid://bshj82dsc4d1u" path="res://Assets/gameover.png" id="1_ls80u"]
+[ext_resource type="FontFile" uid="uid://bor0mknfo11ri" path="res://Assets/font/FlappyBird.ttf" id="2_bmus0"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_e6pfp"]
+bg_color = Color(0.731299, 0.57883, 0.116318, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ua8td"]
+bg_color = Color(0.431495, 0.308548, 0.0622935, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_i2565"]
+bg_color = Color(0.271192, 0.188822, 0.0257093, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cugtv"]
+bg_color = Color(0.316847, 0.222381, 0.0337019, 1)
+
+[node name="UI" type="CanvasLayer"]
+script = ExtResource("1_fdwwc")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_top = 32
+
+[node name="PointsLabel" type="Label" parent="MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+theme_override_constants/outline_size = 4
+theme_override_fonts/font = ExtResource("2_bmus0")
+theme_override_font_sizes/font_size = 64
+text = "0"
+
+[node name="GameOverBox" type="VBoxContainer" parent="MarginContainer"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/GameOverBox"]
+layout_mode = 2
+texture = ExtResource("1_ls80u")
+
+[node name="Panel" type="Panel" parent="MarginContainer/GameOverBox"]
+custom_minimum_size = Vector2(200, 100)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_e6pfp")
+
+[node name="Button" type="Button" parent="MarginContainer/GameOverBox/Panel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -42.0
+offset_top = -16.5
+offset_right = 42.0
+offset_bottom = 16.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("2_bmus0")
+theme_override_font_sizes/font_size = 32
+theme_override_styles/hover = SubResource("StyleBoxFlat_ua8td")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_i2565")
+theme_override_styles/normal = SubResource("StyleBoxFlat_cugtv")
+text = "RESTART"
+
+[connection signal="pressed" from="MarginContainer/GameOverBox/Panel/Button" to="." method="_on_button_pressed"]
